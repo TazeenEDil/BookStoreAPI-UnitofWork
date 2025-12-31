@@ -13,5 +13,9 @@ namespace BookStoreAPI.Models
         public string Author { get; set; }
 
         public decimal Price { get; set; }
+
+        // FK
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }
