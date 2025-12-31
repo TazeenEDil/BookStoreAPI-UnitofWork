@@ -1,6 +1,5 @@
-﻿using BookStoreAPI.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using BookStoreAPI.Models;
 
 namespace BookStoreAPI.Data
 {
@@ -10,5 +9,13 @@ namespace BookStoreAPI.Data
             : base(options) { }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Book>()
+                .Property(b => b.Price)
+                .HasPrecision(18, 2);
+        }
     }
 }

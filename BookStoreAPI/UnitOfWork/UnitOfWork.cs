@@ -8,22 +8,20 @@ namespace BookStoreAPI.UnitOfWork
     {
         private readonly AppDbContext _context;
 
-        public IBookRepository Books { get; private set; }
+        public IBookRepository Books { get; }
+        public ICategoryRepository Categories { get; }
 
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
             Books = new BookRepository(context);
+            Categories = new CategoryRepository(context);
         }
 
         public async Task<int> SaveAsync()
-        {
-            return await _context.SaveChangesAsync();
-        }
+            => await _context.SaveChangesAsync();
 
         public void Dispose()
-        {
-            _context.Dispose();
-        }
+            => _context.Dispose();
     }
 }
