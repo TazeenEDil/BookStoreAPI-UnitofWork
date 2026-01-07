@@ -16,6 +16,15 @@ namespace BookStoreAPI.Data
             modelBuilder.Entity<Book>()
                 .Property(b => b.Price)
                 .HasPrecision(18, 2);
+
+            // Seed some categories
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "General" },
+                new Category { Id = 2, Name = "Fiction" },
+                new Category { Id = 3, Name = "Non-Fiction" },
+                new Category { Id = 4, Name = "Science" },
+                new Category { Id = 5, Name = "Technology" }
+            );
         }
     }
 }
