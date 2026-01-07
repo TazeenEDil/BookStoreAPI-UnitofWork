@@ -26,20 +26,25 @@ namespace BookStoreAPI.Controllers
         {
             var book = await _bookService.GetByIdAsync(id);
             if (book == null) return NotFound();
-
             return Ok(book);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(BookCreateDto dto)
+        public async Task<IActionResult> Create([FromBody] BookCreateDto dto)  // Added [FromBody]
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             await _bookService.CreateAsync(dto);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, BookUpdateDto dto)
+        public async Task<IActionResult> Update(int id, [FromBody] BookUpdateDto dto)  // Added [FromBody]
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             await _bookService.UpdateAsync(id, dto);
             return NoContent();
         }
